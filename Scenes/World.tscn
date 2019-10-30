@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://Scripts/World.gd" type="Script" id=1]
 [ext_resource path="res://Assets/paddle.png" type="Texture" id=2]
@@ -64,7 +64,10 @@ size = 18
 font_data = ExtResource( 5 )
 
 [sub_resource type="RectangleShape2D" id=6]
-extents = Vector2( 41.8616, 46.2422 )
+extents = Vector2( 41.5737, 46.2422 )
+
+[sub_resource type="RectangleShape2D" id=7]
+extents = Vector2( 12.3851, 51.5886 )
 
 [node name="World" type="Node"]
 script = ExtResource( 1 )
@@ -383,3 +386,39 @@ __meta__ = {
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ColorRect/StaticBody2D"]
 shape = SubResource( 6 )
+
+[node name="ColorRect2" type="ColorRect" parent="."]
+margin_left = 79.0
+margin_top = 12.0
+margin_right = 101.0
+margin_bottom = 114.0
+rect_rotation = 45.0
+color = Color( 0, 0, 0, 1 )
+
+[node name="StaticBody2D" type="StaticBody2D" parent="ColorRect2"]
+position = Vector2( 9.21619, 49.8554 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ColorRect2/StaticBody2D"]
+position = Vector2( 0.707108, 0.707108 )
+shape = SubResource( 7 )
+
+[node name="ColorRect3" type="ColorRect" parent="."]
+margin_left = 932.0
+margin_top = 19.0
+margin_right = 959.0
+margin_bottom = 121.0
+rect_rotation = -45.0
+color = Color( 0, 0, 0, 1 )
+
+[node name="StaticBody2D" type="StaticBody2D" parent="ColorRect3"]
+position = Vector2( 12.7517, 50.5625 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ColorRect3/StaticBody2D"]
+position = Vector2( 0.707108, 0.707108 )
+shape = SubResource( 7 )
