@@ -15,8 +15,8 @@ _global_script_class_icons={
 
 [application]
 
-config/name="New Game Project"
-run/main_scene="res://Scenes/World.tscn"
+config/name="Breakout"
+run/main_scene="res://Scenes/Level1.tscn"
 config/icon="res://icon.png"
 
 [rendering]

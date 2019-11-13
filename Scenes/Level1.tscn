@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=16 format=2]
 
 [ext_resource path="res://Scripts/World.gd" type="Script" id=1]
 [ext_resource path="res://Assets/paddle.png" type="Texture" id=2]
@@ -55,19 +55,32 @@ func _physics_process(delta):
   emit_signal(\"lives\")
   queue_free()"
 
-[sub_resource type="DynamicFont" id=4]
-size = 18
-font_data = ExtResource( 5 )
+[sub_resource type="ParticlesMaterial" id=4]
+emission_shape = 1
+emission_sphere_radius = 1.0
+flag_disable_z = true
+spread = 180.0
+gravity = Vector3( 0, 0, 0 )
+initial_velocity = 100.0
+initial_velocity_random = 0.5
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+linear_accel = 100.0
+scale = 2.0
 
 [sub_resource type="DynamicFont" id=5]
 size = 18
 font_data = ExtResource( 5 )
 
-[sub_resource type="RectangleShape2D" id=6]
-extents = Vector2( 41.5737, 46.2422 )
+[sub_resource type="DynamicFont" id=6]
+size = 18
+font_data = ExtResource( 5 )
 
 [sub_resource type="RectangleShape2D" id=7]
-extents = Vector2( 12.3851, 51.5886 )
+extents = Vector2( 41.5737, 46.2422 )
+
+[sub_resource type="RectangleShape2D" id=8]
+extents = Vector2( 13.9656, 61.4453 )
 
 [node name="World" type="Node"]
 script = ExtResource( 1 )
@@ -89,15 +102,26 @@ shape = SubResource( 2 )
 [node name="Ball" parent="." instance=ExtResource( 3 )]
 script = SubResource( 3 )
 
+[node name="Particles2D" type="Particles2D" parent="Ball"]
+emitting = false
+amount = 10
+one_shot = true
+explosiveness = 1.0
+process_material = SubResource( 4 )
+
+[node name="ColorRect" type="ColorRect" parent="Ball"]
+margin_right = 40.0
+margin_bottom = 40.0
+
 [node name="Wall" type="StaticBody2D" parent="."]
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Wall"]
 polygon = PoolVector2Array( 0, 640, 0, 0, 1024, 0, 1024, 640, 1088, 640, 1088, -64, -64, -64, -64, 640, 0, 640 )
 
 [node name="Tiles" type="Node" parent="."]
-editor/display_folded = true
 
 [node name="Gray Tiles" type="Node2D" parent="Tiles"]
+editor/display_folded = true
 position = Vector2( 6.13867, -91.0891 )
 __meta__ = {
 "_edit_group_": true
@@ -282,6 +306,9 @@ rotation = 0.785398
 [node name="Purple Tiles" type="Node2D" parent="Tiles"]
 editor/display_folded = true
 position = Vector2( 12, -240 )
+__meta__ = {
+"_edit_group_": true
+}
 
 [node name="Tile" parent="Tiles/Purple Tiles" instance=ExtResource( 4 )]
 position = Vector2( 160, 330 )
@@ -354,20 +381,20 @@ position = Vector2( 772, 310 )
 position = Vector2( 840, 310 )
 
 [node name="Score" type="Label" parent="."]
-margin_left = 21.0
-margin_top = 15.0
-margin_right = 118.0
-margin_bottom = 49.0
-custom_fonts/font = SubResource( 4 )
+margin_left = 7.70361
+margin_top = 10.5679
+margin_right = 104.704
+margin_bottom = 44.5679
+custom_fonts/font = SubResource( 5 )
 text = "Score:"
 script = ExtResource( 6 )
 
 [node name="Lives" type="Label" parent="."]
-margin_left = 938.0
-margin_top = 16.0
-margin_right = 1014.0
-margin_bottom = 48.0
-custom_fonts/font = SubResource( 5 )
+margin_left = 959.053
+margin_top = 8.24377
+margin_right = 1035.05
+margin_bottom = 40.2438
+custom_fonts/font = SubResource( 6 )
 text = "Lives:"
 script = ExtResource( 7 )
 
@@ -385,40 +412,43 @@ __meta__ = {
 }
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ColorRect/StaticBody2D"]
-shape = SubResource( 6 )
+shape = SubResource( 7 )
 
 [node name="ColorRect2" type="ColorRect" parent="."]
-margin_left = 79.0
-margin_top = 12.0
-margin_right = 101.0
-margin_bottom = 114.0
+editor/display_folded = true
+margin_left = 86.0
+margin_top = 8.0
+margin_right = 113.0
+margin_bottom = 130.0
 rect_rotation = 45.0
 color = Color( 0, 0, 0, 1 )
+__meta__ = {
+"_edit_group_": true
+}
 
 [node name="StaticBody2D" type="StaticBody2D" parent="ColorRect2"]
+editor/display_folded = true
 position = Vector2( 9.21619, 49.8554 )
-__meta__ = {
-"_edit_group_": true
-}
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ColorRect2/StaticBody2D"]
-position = Vector2( 0.707108, 0.707108 )
-shape = SubResource( 7 )
+position = Vector2( 3.84108, 10.1091 )
+shape = SubResource( 8 )
 
 [node name="ColorRect3" type="ColorRect" parent="."]
-margin_left = 932.0
-margin_top = 19.0
-margin_right = 959.0
-margin_bottom = 121.0
+editor/display_folded = true
+margin_left = 910.947
+margin_top = 30.0803
+margin_right = 937.947
+margin_bottom = 152.08
 rect_rotation = -45.0
 color = Color( 0, 0, 0, 1 )
-
-[node name="StaticBody2D" type="StaticBody2D" parent="ColorRect3"]
-position = Vector2( 12.7517, 50.5625 )
 __meta__ = {
 "_edit_group_": true
 }
 
+[node name="StaticBody2D" type="StaticBody2D" parent="ColorRect3"]
+position = Vector2( 11.9682, 49.779 )
+
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ColorRect3/StaticBody2D"]
-position = Vector2( 0.707108, 0.707108 )
-shape = SubResource( 7 )
+position = Vector2( 2.27406, 11.676 )
+shape = SubResource( 8 )
